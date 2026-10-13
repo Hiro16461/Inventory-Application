@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <main class="container">
+    <a href="/category/<%= item.category_id %>" class="back-link">← Back to Category</a>
+    
+    <article class="item-detail">
+      <h1><%= item.name %></h1>
+      <p class="description"><strong>Description:</strong> <%= item.description %></p>
+      <p class="price"><strong>Price:</strong> $<%= item.price %></p>
+      <p class="stock"><strong>Stock Available:</strong> <%= item.stock_count %> units</p>
+
+      <div class="admin-controls" style="margin-top: 30px;">
+        <a href="/item/<%= item.id %>/update" class="btn btn-secondary">Edit Item</a>
+        
+        <form action="/item/<%= item.id %>/delete" method="POST" class="delete-form" style="margin-top: 15px;">
+          <label for="admin_password">Admin Password to Delete Item:</label>
+          <input type="password" name="admin_password" id="admin_password" placeholder="Enter secret password" required>
+          <button type="submit" class="btn btn-danger">Delete Item</button>
+        </form>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

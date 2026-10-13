@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <main class="container">
+    <a href="/" class="back-link">← Back to Home</a>
+    
+    <header class="detail-header">
+      <h1><%= category.name %></h1>
+      <p class="description"><%= category.description %></p>
+      
+      <div class="admin-controls">
+        <a href="/category/<%= category.id %>/update" class="btn btn-secondary">Edit Category</a>
+        
+        <form action="/category/<%= category.id %>/delete" method="POST" class="delete-form">
+          <label for="admin_password">Admin Password to Delete Category:</label>
+          <input type="password" name="admin_password" id="admin_password" placeholder="Enter secret password" required>
+          <button type="submit" class="btn btn-danger">Delete Category</button>
+        </form>
+      </div>
+    </header>
+
+    <hr>
+
+    <section class="item-list-section">
+      <h2>Items in this Category</h2>
+      <% if (items.length === 0) { %>
+        <p>There are no items listed in this category yet.</p>
+      <% } else { %>
+        <ul class="item-list">
+          <% items.forEach(item => { %>
+            <li class="item-card">
+              <a href="/item/<%= item.id %>">
+                <strong><%= item.name %></strong>
+              </a> 
+              <span class="price">$<%= item.price %></span> 
+              <span class="stock">(<%= item.stock_count %> in stock)</span>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

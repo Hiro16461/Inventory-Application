@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <main class="container">
+    <a href="/" class="back-link">← Back to Home</a>
+    <h1><%= title %></h1>
+
+    <% if (locals.errorMessage) { %>
+      <p class="error-msg" style="color: red;"><%= errorMessage %></p>
+    <% } %>
+
+    <!-- Dynamically switches form action based on whether category exists (Create vs Update) -->
+    <form action="<%= category ? `/category/${category.id}/update` : '/category/create' %>" method="POST" class="form-card">
+      
+      <div class="form-group">
+        <label for="name">Category Name:</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          value="<%= category ? category.name : '' %>" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea 
+          id="description" 
+          name="description" 
+          rows="4"
+        ><%= category ? category.description : '' %></textarea>
+      </div>
+
+      <!-- Show admin password confirmation field only when updating -->
+      <% if (category) { %>
+        <div class="form-group admin-group">
+          <label for="admin_password">Admin Password (Required for Update):</label>
+          <input 
+            type="password" 
+            id="admin_password" 
+            name="admin_password" 
+            placeholder="Enter secret password" 
+            required
+          >
+        </div>
+      <% } %>
+
+      <button type="submit" class="btn">Submit Category</button>
+    </form>
+  </main>
+</body>
+</html>

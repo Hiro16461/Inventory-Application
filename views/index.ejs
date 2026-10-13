@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1><%= title %></h1>
+      <nav class="actions-nav">
+        <a href="/category/create" class="btn">+ Create New Category</a>
+        <a href="/item/create" class="btn">+ Create New Item</a>
+      </nav>
+    </header>
+
+    <section class="category-list">
+      <h2>Store Categories</h2>
+      <% if (categories.length === 0) { %>
+        <p>No categories found in inventory.</p>
+      <% } else { %>
+        <ul class="grid">
+          <% categories.forEach(category => { %>
+            <li class="card">
+              <a href="/category/<%= category.id %>">
+                <h3><%= category.name %></h3>
+              </a>
+              <p><%= category.description %></p>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>
