@@ -1,7 +1,7 @@
 {
   "scripts": {
     "populatedb": "node db/populatedb.js",
-    "start": "node app.js",
+    "start": "node db/populatedb.js && node app.js",
     "dev": "nodemon app.js"
   },
   "dependencies": {
